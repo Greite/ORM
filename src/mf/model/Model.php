@@ -6,7 +6,10 @@ namespace mf\model;
 
 abstract class Model
 {
-	private $att = [];
+	protected static $table;
+	protected static $idColumn = 'id';
+	
+	protected $att = [];
 
 	function __construct($tab=[]){
 		$this->att=$tab;
@@ -26,5 +29,14 @@ abstract class Model
 			
 		}
 		else return $this->$name=$value;
+	}
+
+	public static function all() : array {
+		$all = Query::table(static::$table)->get();
+		$return = [];
+		foreach( $all as $m) {
+			$return[] = new static($m);
+		}
+		return $return;
 	}
 }

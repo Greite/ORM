@@ -29,7 +29,11 @@ class Query {
 	}
 
 	public function where($col, $op, $val){
-		$this->where = $col.$op.'?';
+		if(is_null($this->where)){
+			$this->where=" WHERE $col $op ?";
+		}else{
+			$this->where.=" AND $col $op ?";
+		}
 		$this->args[]=$val;
 		return $this;
 	}
@@ -37,7 +41,7 @@ class Query {
 	public function get(){
 		$this->sql = 'SELECT '.$this->fields.' FROM '.$this->sqltable;
 		if (!is_null($this->where)) {
-			$this->sql .= ' WHERE '.$this->where;
+			$this->sql .= $this->where;
 		}
 		$db = ConnectionFactory::getConnection();
 		$get = $db->prepare($this->sql);
@@ -45,7 +49,7 @@ class Query {
 		return $get->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-	public function insert(){
+	public function insert(array $t){
 		$this->sql = 'INSERT INTO '.$this->sqltable;
 		$into=[];
 		$values=[];
@@ -66,6 +70,9 @@ class Query {
 		if (!is_null($this->where)) {
 			$this->sql.='WHERE '.$this->where;
 		}
+		$db= connection\ConnectionFactory::getConnection();
+		$stmt = $db->prepare($this->sql);
+		$stmt->execute($this->args);
 	}
 
 	public function update(){
