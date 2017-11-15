@@ -2,17 +2,17 @@
 /**
 * 
 */
-namespace model;
+namespace mf\model;
 
 abstract class Model
 {
-	$att = [];
+	private $att = [];
 
 	function __construct($tab=[]){
 		$this->att=$tab;
 	}
 
-	function __get(){
+	function __get($name){
 		if (!property_exists($this, $name)){
 			throw new \Exception("L'attribut n'existe pas !", 1);
 			
@@ -20,7 +20,7 @@ abstract class Model
 		else return $this->$name;
 	}
 
-	function __set(){
+	function __set($name, $value){
 		if (!property_exists($this, $name)){
 			throw new \Exception("L'attribut n'existe pas !", 1);
 			

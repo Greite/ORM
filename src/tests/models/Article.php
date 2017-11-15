@@ -2,9 +2,9 @@
 /**
 * 
 */
-namespace model;
+namespace tests\models;
 
-class Article extends Model
+class Article extends \mf\model\Model
 {
 
 }

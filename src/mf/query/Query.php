@@ -2,12 +2,12 @@
 /**
 * 
 */
-namespace query;
+namespace mf\query;
 
-require_once 'src/connection/ConnectionFactory.php';
+require_once 'src/mf/connection/ConnectionFactory.php';
 
 use PDO;
-use \connection\ConnectionFactory as ConnectionFactory;
+use mf\connection\ConnectionFactory as ConnectionFactory;
 
 class Query {
 	

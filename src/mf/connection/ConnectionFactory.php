@@ -2,7 +2,7 @@
 /**
 * 
 */
-namespace connection;
+namespace mf\connection;
 
 use PDO;
 
