@@ -17,18 +17,30 @@ $query = new Query();
 $query = $query::table("article");
 $reponse = $query->select(["descr"])->where("id_categ", "=", "1")->where("nom", "=", "velo")->get();
 //$insert = $query->insert()
-print_r($reponse);
+//print_r($reponse);
 
 $article = new Article(array('id' => 67, 'nom' => 'trotinette', 'descr' => 'Superbe trotinette rosso corsa', 'tarif' => 80, 'id_categ' => 1));
-print_r($article->att);
+//print_r($article->att);
 
 //5. finders
 
 // $a = new Article();
 // $a->nom = 'velo';
-// $a->tarif=273;
-// $a->insert();
-$liste = Article::all();
+// $a->tarif=80;
+// $a->id_categ=1;
+// $a->id = $a->save();
+
+// echo $a->id;
+
+/*$liste = Article::all();
 foreach( $liste as $art){
-	print $a->nom;
+	print $art->nom;
+}*/
+
+$l = Article::find([['nom', '=', 'velo'],['tarif', '<=', 100]], ['nom', 'tarif']);
+
+foreach ($l as $key => $value) {
+	print_r($l[$key]);
 }
+// $arti = $l[0];
+// print_r($arti);

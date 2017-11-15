@@ -62,7 +62,7 @@ class Query {
 		$db = ConnectionFactory::getConnection();
 		$insert = $db->prepare($this->sql);
 		$insert->execute($this->args);
-		return $insert->lastInsertId();
+		return $db->lastInsertId();
 	}
 
 	public function delete(){
