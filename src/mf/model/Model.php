@@ -57,7 +57,7 @@ abstract class Model
 		return $return;
 	}
 
-	public static function first($id, $tab=['*']) : array {
+	public static function first($id, $tab=['*']) {
 		$find = \mf\query\Query::table(static::$table)->select($tab);
 		if (is_int($id)) {
 			$find = $find->where('id','=', $id);
@@ -68,8 +68,20 @@ abstract class Model
 			}
 		}
 		$find = $find->get();
-		$return = $find[0];
+		$return = new static($find[0]);
 		
 		return $return;
+	}
+
+	public function belongs_to($class, $key) {
+		$name = new $class();
+		$result = $name::first($this->$key);
+		return $result;
+	}
+
+	public function has_many($class, $key) {
+		$name = new $class();
+		$result = $name::find([[$key, '=', $this->id]]);
+		return $result;
 	}
 }
