@@ -56,4 +56,20 @@ abstract class Model
 		}
 		return $return;
 	}
+
+	public static function first($id, $tab=['*']) : array {
+		$find = \mf\query\Query::table(static::$table)->select($tab);
+		if (is_int($id)) {
+			$find = $find->where('id','=', $id);
+		}
+		else {
+			foreach ($id as $value) {
+				$find = $find->where($value[0], $value[1], $value[2]);
+			}
+		}
+		$find = $find->get();
+		$return = $find[0];
+		
+		return $return;
+	}
 }
