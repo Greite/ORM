@@ -45,5 +45,9 @@ print_r($l);*/
 print_r($categorie);
 echo '<br>';*/
 
-$list= Categorie::first(1)->articles();
-print_r($list);
+/*$list= Categorie::first(1)->articles();
+print_r($list);*/
+
+$c = Categorie::first(1);
+$list_articles = $c->articles;
+print_r($list_articles);

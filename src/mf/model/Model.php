@@ -19,6 +19,7 @@ abstract class Model
 		if (array_key_exists($attr_name, $this->tab_att)){
 			return $this->tab_att[$attr_name];
 		}
+		else return $this->$attr_name();
 	}
 
 	function __set($attr_name, $value){
