@@ -1,10 +1,11 @@
 
 <?php
-require_once 'src/mf/query/Query.php';
-require_once 'src/mf/model/Model.php';
-require_once 'src/tests/models/Article.php';
-require_once 'src/tests/models/Categorie.php';
-require_once 'src/mf/connection/ConnectionFactory.php';
+
+require_once 'src/mf/utils/ClassLoader.php';
+
+$loader = new \mf\utils\ClassLoader("src");
+$loader -> register();
+
 use mf\query\Query as Query;
 use mf\connection\ConnectionFactory as ConnectionFactory;
 use mf\model\Model as Model;
@@ -38,15 +39,20 @@ foreach ($l as $key => $value) {
 // $arti = $l[0];
 // print_r($arti);
 
-/*$l = Article::first(65, ['nom', 'tarif']);
-print_r($l);*/
+$l = Article::first(65, ['nom', 'tarif']);
+print_r($l);
+echo '<br>';
+echo '<br>';
 
-/*$categorie = Article::first(65)->categorie();
+$categorie = Article::first(65)->categorie();
 print_r($categorie);
-echo '<br>';*/
+echo '<br>';
+echo '<br>';
 
-/*$list= Categorie::first(1)->articles();
-print_r($list);*/
+$list= Categorie::first(1)->articles();
+print_r($list);
+echo '<br>';
+echo '<br>';
 
 $c = Categorie::first(1);
 $list_articles = $c->articles;

@@ -4,8 +4,6 @@
 */
 namespace mf\query;
 
-require_once 'src/mf/connection/ConnectionFactory.php';
-
 use PDO;
 use mf\connection\ConnectionFactory as ConnectionFactory;
 
